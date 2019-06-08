@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h1>Please Login</h1>
+
+    <form action='handle_login'>
+
+        <label for='firstname'>First Name </label>
+        <input id='first-name' type='text' name='first-name' placeholder='ex: Jill' required><br>
+
+        <label for='lastname'>Last Name </label>
+        <input id='last-name' type='text' name='last-name' placeholder='ex: Martinez' required><br>
+
+        <label for='email'>Your Email </label>
+        <input id='email' type='email' required><br>
+
+        <label for='is-ranger'>What Type of User Are You? </label>
+        <select id='is-ranger' name='is-ranger'>
+                <option value=''>--Choose an option--</option>
+                <option value='jr-ranger'>Jr. Ranger</option>
+                <option value='ranger'>Park Ranger</option>
+        </select><br>
+
+        <input type='submit' value='Login!'>
+
+    </form>
+
+
+
+
+    <h2><a href='/about'>Learn more about the Jr. Ranger Program!</a></h2>
+
+{% endblock %}
