@@ -50,15 +50,12 @@ def handle_login():
         is_user = db.session.query(User.email).filter(User.email == email).first()
 
         if is_user:
-
             return redirect('/activities', name = first_name)
 
         else: 
-            
             return redirect('/register')
 
     else:
-
         return redirect('/')
 
 @app.route('/register')
