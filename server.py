@@ -29,7 +29,13 @@ app.jinja_env.undefined = StrictUndefined
 def show_homepage():
     """Display home page"""
     
-    pass
+    return render_template('homepage.html')
+
+@app.route('/login')
+def handle_login():
+    """Handle user log in"""
+
+    
 
 
 ##### Dunder Main ############################################################
