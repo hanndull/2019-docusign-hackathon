@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Jr. Ranger Portal</title>
+  {% block head %}
+
+  {% endblock %}
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Righteous&display=swap" rel="stylesheet"> 
+</head>
+
+<body>
+
+<div class=flash-box>
+    <!--  Flash messages display here 
+      Note -- currently no use of flash -->
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <span class=flashes>
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+        </span>
+      {% endif %}
+    {% endwith %}
+</div>
+
+<h3><a href="/">Jr. Ranger Portal</a></h3>
+<hr>
+
+{% block content %} fill in content here {% endblock %}
+
+</body>
+
+</html>
