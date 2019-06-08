@@ -9,10 +9,9 @@
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
-from model import connect_to_db, db, ### TODO - insert classes from model
+# from model import connect_to_db, db, ### TODO - insert classes from model
 from sqlalchemy import func, distinct
 import requests
-import json
 
 ##### Create App #############################################################
 
@@ -32,11 +31,60 @@ def show_homepage():
     return render_template('homepage.html')
 
 @app.route('/login')
+def user_login():
+    """Display user login page"""
+
+    return render_template('login.html')
+
+@app.route('/handle_login')
 def handle_login():
-    """Handle user log in"""
+    """Handle user login"""
 
-    
+    first_name = request.args.get('first-name')
+    last_name = request.args.get('last-name')
+    email = request.args.get('email')
+    user_type = request.args.get('type')
 
+    if user_type != 'ranger':
+
+        is_user = db.session.query(User.email).filter(User.email == email).first()
+
+        if is_user:
+
+            return redirect('/activities', name = first_name)
+
+        else: 
+            
+            return redirect('/register')
+
+    else:
+
+        return redirect('/')
+
+@app.route('/register')
+def user_registration():
+    """Register user"""
+
+    return render_template('registration.html')
+
+@app.route('/handle_registration', methods=["POST"])
+def handle_registration():
+    """Handle user registration"""
+
+    first_name = request.form.get('first-name')
+    last_name = request.form.get('last-name')
+    email = request.form.get('email')
+    user_type = request.form.get('type')
+
+    if user_type == 'ranger':
+        is_ranger = True
+    else:
+        is_ranger = False
+
+    user = db.session.add(User(first_name, last_name, email, is_ranger))
+    db.session.commit()
+
+    return redirect('/login')
 
 ##### Dunder Main ############################################################
 
@@ -49,7 +97,7 @@ if __name__ == "__main__":
     app.jinja_env.auto_reload = app.debug
 
 
-    connect_to_db(app)
+    # connect_to_db(app)
 
     ### enables use of DebugToolbar
     DebugToolbarExtension(app)
