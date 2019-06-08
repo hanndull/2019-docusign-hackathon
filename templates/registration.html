@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>Please Login</h1>
+  <h1>Please Register</h1>
 
-    <form action='handle_login'>
+    <form action='handle_registration' method='POST'>
 
         <label for='firstname'>First Name </label>
         <input id='first-name' type='text' name='first-name' placeholder='ex: Jill' required><br>
@@ -21,7 +21,7 @@
                 <option value='ranger'>Park Ranger</option>
         </select><br>
 
-        <input type='submit' value='Login!'>
+        <input type='submit' value='Register!'>
 
     </form>
 
@@ -29,6 +29,6 @@
 
 
     <h2><a href='/about'>Learn more about the Jr. Ranger Program!</a></h2>
-    <h2><a href="/register">Join our Jr. Ranger Program!</a></h2>
+    <h2><a href='/login'>Already a user? Login here</a></h2>
 
 {% endblock %}
